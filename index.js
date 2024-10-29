@@ -52,16 +52,13 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   try {
-    // Check if email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use." });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user
     const user = new User({
       fullName,
       already,

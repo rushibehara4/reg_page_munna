@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rushi Behara",
   "license": "ISC",
-  "description": "",
+  "description": "A backend service for user registration.",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
