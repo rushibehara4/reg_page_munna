@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
+const cors = require("cors")
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGO_URI)
