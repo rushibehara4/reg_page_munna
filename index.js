@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-const cors = require("cors")
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
@@ -32,19 +32,10 @@ app.post("/register", async (req, res) => {
     skillsLearned,
     currentCompany,
     currentCompanySkills,
-    previousCompanyDomains1,
-    previousCompanySkills1,
-    previousCompanyDomains2,
-    previousCompanySkills2,
-    previousCompanyDomains3,
-    previousCompanySkills3,
-    previousCompanyDomains4,
-    previousCompanySkills4,
-    previousCompanyDomains5,
-    previousCompanySkills5,
+    previousCompanies,
     cvLink,
-    linkedinUrls1,
-    linkedinUrls2,
+    linkedinProfile1,
+    linkedinProfile2,
     resumeReviewed,
     resumeReviewedStewards,
     mockClear,
@@ -78,19 +69,10 @@ app.post("/register", async (req, res) => {
       skillsLearned,
       currentCompany,
       currentCompanySkills,
-      previousCompanyDomains1,
-      previousCompanySkills1,
-      previousCompanyDomains2,
-      previousCompanySkills2,
-      previousCompanyDomains3,
-      previousCompanySkills3,
-      previousCompanyDomains4,
-      previousCompanySkills4,
-      previousCompanyDomains5,
-      previousCompanySkills5,
+      previousCompanies,
       cvLink,
-      linkedinUrls1,
-      linkedinUrls2,
+      linkedinProfile1,
+      linkedinProfile2,
       resumeReviewed,
       resumeReviewedStewards,
       mockClear,
