@@ -9,7 +9,12 @@ const userSchema = new mongoose.Schema(
   {
     fullName: { type: String, required: true, trim: true },
     already: { type: Boolean, required: true },
-    email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: /.+\@.+\..+/,
+    },
     mobileNumber: {
       type: String,
       required: true,
@@ -39,8 +44,7 @@ const userSchema = new mongoose.Schema(
     previousCompanies: { type: [previousCompanySchema], default: [] },
     cvLink: {
       type: String,
-      match: /https?:\/\/(www\.)?[a-zA-Z0-9]+(\.[a-z]{2,})/,
-      trim: true,
+      required: true,
     },
     linkedinProfile1: {
       type: String,
@@ -53,7 +57,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     resumeReviewed: { type: String, required: true },
-    resumeReviewedStewards: { type: Boolean, default: true },
+    resumeReviewedStewards: { type: String, required: true },
     mockClear: { type: Boolean, default: false },
     round2Clear: { type: Boolean, default: false },
     h1b: { type: Boolean, default: false },
