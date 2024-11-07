@@ -10,11 +10,13 @@ app.use(express.json());
 
 app.use(cors());
 
+// Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Failed to connect to MongoDB:", err.message));
 
+// Register route
 app.post("/register", async (req, res) => {
   const {
     fullName,
@@ -46,13 +48,16 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   try {
+    // Check if email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use." });
     }
 
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create a new user document
     const user = new User({
       fullName,
       already,
@@ -82,6 +87,7 @@ app.post("/register", async (req, res) => {
       round2Comments,
     });
 
+    // Save user to database
     const savedUser = await user.save();
     res
       .status(201)
@@ -91,15 +97,17 @@ app.post("/register", async (req, res) => {
   }
 });
 
+// Get all users route
 app.get("/", async (req, res) => {
   try {
     const users = await User.find();
-    res.send(users);
+    res.json(users);
   } catch (error) {
     res.status(500).send("Error fetching users");
   }
 });
 
+// Delete all users route
 app.delete("/users", async (req, res) => {
   try {
     await User.deleteMany();
@@ -109,8 +117,8 @@ app.delete("/users", async (req, res) => {
   }
 });
 
+// Start the server
 const PORT = process.env.PORT || 8080;
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

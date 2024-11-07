@@ -42,23 +42,16 @@ const userSchema = new mongoose.Schema(
     currentCompany: { type: String, required: true, trim: true },
     currentCompanySkills: { type: [String], default: [] },
     previousCompanies: { type: [previousCompanySchema], default: [] },
-    cvLink: {
-      type: String,
-      required: true,
-    },
+    cvLink: { type: String, required: true },
     linkedinProfile1: {
       type: String,
-      match:
-        /^(https?:\/\/(www\.)?linkedin\.com\/(in|pub|company)\/[a-zA-Z0-9_-]+)$/,
+      match: /^(https:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9-]+\/?$/,
       trim: true,
-      required: false,
     },
     linkedinProfile2: {
       type: String,
-      match:
-        /^(https?:\/\/(www\.)?linkedin\.com\/(in|pub|company)\/[a-zA-Z0-9_-]+)$/,
+      match: /^(https:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9-]+\/?$/,
       trim: true,
-      required: false,
     },
     resumeReviewed: { type: String, required: true },
     resumeReviewedStewards: { type: String, required: true },
