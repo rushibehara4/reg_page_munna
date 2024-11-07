@@ -1,67 +1,111 @@
 const mongoose = require("mongoose");
 
-const previousCompanySchema = new mongoose.Schema({
-  domain: { type: String, trim: true },
-  skills: { type: [String], default: [] },
-});
-
-const userSchema = new mongoose.Schema(
-  {
-    fullName: { type: String, required: true, trim: true },
-    already: { type: Boolean, required: true },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: /.+\@.+\..+/,
-    },
-    mobileNumber: {
-      type: String,
-      required: true,
-      match: /^[0-9]{10}$/,
-      trim: true,
-    },
-    password: { type: String, required: true },
-    dob: {
-      type: Date,
-      required: true,
-      validate: {
-        validator: function (value) {
-          return value <= new Date();
-        },
-        message: "Date of birth cannot be in the future.",
-      },
-    },
-    relocate: { type: Boolean, required: true },
-    currentLocation: { type: String, required: true, trim: true },
-    experience: { type: Number, required: true },
-    realExperience: { type: Number, required: true },
-    realItExperience: { type: Number, required: true },
-    itExperienceDescription: { type: String, default: "", trim: true },
-    skillsLearned: { type: [String], default: [] },
-    currentCompany: { type: String, required: true, trim: true },
-    currentCompanySkills: { type: [String], default: [] },
-    previousCompanies: { type: [previousCompanySchema], default: [] },
-    cvLink: { type: String, required: true },
-    linkedinProfile1: {
-      type: String,
-      match: /^(https:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9-]+\/?$/,
-      trim: true,
-    },
-    linkedinProfile2: {
-      type: String,
-      match: /^(https:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9-]+\/?$/,
-      trim: true,
-    },
-    resumeReviewed: { type: String, required: true },
-    resumeReviewedStewards: { type: String, required: true },
-    mockClear: { type: Boolean, default: false },
-    round2Clear: { type: Boolean, default: false },
-    h1b: { type: Boolean, default: false },
-    round1Comments: { type: String, trim: true },
-    round2Comments: { type: String, trim: true },
+const userSchema = new mongoose.Schema({
+  fullName: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  already: {
+    type: Boolean,
+    default: false,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  mobileNumber: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  dob: {
+    type: Date,
+    required: true,
+  },
+  relocate: {
+    type: Boolean,
+    default: false,
+  },
+  currentLocation: {
+    type: String,
+    required: true,
+  },
+  experience: {
+    type: Number,
+    default: 0,
+  },
+  realExperience: {
+    type: Number,
+    default: 0,
+  },
+  realItExperience: {
+    type: Number,
+    default: 0,
+  },
+  itExperienceDescription: {
+    type: String,
+    required: true,
+  },
+  skillsLearned: {
+    type: [String],
+    default: [],
+  },
+  currentCompany: {
+    type: String,
+    required: true,
+  },
+  currentCompanySkills: {
+    type: [String],
+    default: [],
+  },
+  previousCompanies: [
+    {
+      domain: String,
+      skills: [String],
+    },
+  ],
+  cvLink: {
+    type: String,
+    required: true,
+  },
+  linkedinProfiles: {
+    type: [String],
+    default: [],
+  },
+  resumeReviewed: {
+    type: String,
+    required: true,
+  },
+  resumeReviewedStewards: {
+    type: String,
+    required: true,
+  },
+  mockClear: {
+    type: Boolean,
+    default: false,
+  },
+  round2Clear: {
+    type: Boolean,
+    default: false,
+  },
+  h1b: {
+    type: Boolean,
+    default: false,
+  },
+  round1Comments: {
+    type: String,
+    required: true,
+  },
+  round2Comments: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
