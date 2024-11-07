@@ -48,13 +48,17 @@ const userSchema = new mongoose.Schema(
     },
     linkedinProfile1: {
       type: String,
-      match: /https?:\/\/(www\.)?linkedin\.com\/.*/,
+      match:
+        /^(https?:\/\/(www\.)?linkedin\.com\/(in|pub|company)\/[a-zA-Z0-9_-]+)$/,
       trim: true,
+      required: false,
     },
     linkedinProfile2: {
       type: String,
-      match: /https?:\/\/(www\.)?linkedin\.com\/.*/,
+      match:
+        /^(https?:\/\/(www\.)?linkedin\.com\/(in|pub|company)\/[a-zA-Z0-9_-]+)$/,
       trim: true,
+      required: false,
     },
     resumeReviewed: { type: String, required: true },
     resumeReviewedStewards: { type: String, required: true },
